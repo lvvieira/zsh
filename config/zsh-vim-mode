@@ -1,0 +1,125 @@
+bindkey -v
+export KEYTIMEOUT=20
+
+
+# Use vim keys in tab complete menu:
+bindkey -M menuselect '^j' vi-backward-char
+bindkey -M menuselect '^i' vi-up-line-or-history
+bindkey -M menuselect '^l' vi-forward-char
+bindkey -M menuselect '^k' vi-down-line-or-history
+bindkey -v '^?' backward-delete-char
+
+#=======
+# Insert
+#=======
+
+bindkey -M vicmd a vi-insert
+
+#=========
+# Movement
+#=========
+
+bindkey -M vicmd i vi-up-line-or-history
+bindkey -M vicmd j vi-backward-char
+bindkey -M vicmd l vi-forward-char
+bindkey -M vicmd k vi-down-line-or-history
+
+bindkey -M vicmd h vi-backward-word
+bindkey -M vicmd ç vi-forward-word
+bindkey -M vicmd J vi-beginning-of-line
+bindkey -M vicmd L vi-end-of-line
+
+bindkey -M vicmd dw kill-word
+
+bindkey '^u' up-history
+bindkey '^y' down-history
+bindkey '^u' backward-delete-char
+bindkey '^o' backward-kill-word
+bindkey '^r' history-incremental-search-backward
+
+# Movement
+# bindkey -M vicmd vi-backward-blank-word
+# bindkey -M vicmd vi-backward-blank-word-end
+# bindkey -M vicmd vi-backward-word-end
+# bindkey -M vicmd beginning-of-line
+# bindkey -M vicmd down-line
+# bindkey -M vicmd end-of-line
+# bindkey -M vicmd vi-forward-blank-word
+# bindkey -M vicmd vi-forward-blank-word-end
+# bindkey -M vicmd forward-char
+# bindkey -M vicmd vi-find-next-char
+# bindkey -M vicmd vi-find-next-char-skip
+# bindkey -M vicmd vi-find-prev-char
+# bindkey -M vicmd vi-find-prev-char-skip
+# bindkey -M vicmd vi-first-non-blank
+# bindkey -M vicmd forward-word
+# bindkey -M vicmd vi-forward-word-end
+# bindkey -M vicmd vi-goto-column
+# bindkey -M vicmd vi-goto-mark
+# bindkey -M vicmd vi-goto-mark-line
+# bindkey -M vicmd vi-repeat-find
+# bindkey -M vicmd vi-rev-repeat-find
+# bindkey -M vicmd up-line
+
+# vi-add-next
+# backward-delete-char
+#vi-backward-delete-char
+#backward-delete-word
+#backward-kill-line
+#backward-kill-word
+#vi-backward-kill-word
+#capitalize-word
+#vi-change
+#vi-change-eol
+#vi-change-whole-line
+#copy-region-as-kill
+#copy-prev-word
+#copy-prev-shell-word
+#vi-delete
+#delete-char
+#vi-delete-char
+#delete-word
+#down-case-word
+#vi-down-case
+#kill-word
+#vi-indent
+#vi-insert
+#vi-insert-bol
+#vi-join
+#kill-line
+#vi-kill-line
+
+
+
+
+#==========
+# MY PROMPT
+#==========
+#
+#terminfo_down_sc=$terminfo[cud1]$terminfo[cuu1]$terminfo[sc]$terminfo[cud1]
+#
+#function insert-mode () { echo "-- INSERT --" }
+#function normal-mode () { echo "-- NORMAL --" }
+#
+#precmd () {
+#      print -rP "%B%{$fg[blue]%}[%{$fg[white]%}%n%{$fg[blue]%}@%{$fg[white]%}%m%{$fg[blue]%}] %~"
+#      PS1="%{$terminfo_down_sc$(insert-mode)$terminfo[rc]%} $ "
+#}
+#
+#function set-prompt () {
+#    case ${KEYMAP} in
+#      (vicmd)      VI_MODE="$(normal-mode)" ;;
+#      (main|viins) VI_MODE="$(insert-mode)" ;;
+#      (*)          VI_MODE="$(insert-mode)" ;;
+#    esac
+#    PS1="%{$terminfo_down_sc$VI_MODE$terminfo[rc]%} $ "
+#}
+#
+#function zle-line-init zle-keymap-select {
+#    set-prompt
+#    zle reset-prompt
+#}
+#preexec () { print -rn -- $terminfo[el]; }
+#
+#zle -N zle-line-init
+#zle -N zle-keymap-select

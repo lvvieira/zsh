@@ -1,0 +1,123 @@
+#!/bin/sh
+alias update-site="sudo rsync -apvz -e 'ssh -p 69 -i /home/lucas/.ssh/id_rsa' --exclude='lvvieira/settings.py' --exclude='media'  /etc/WWW.LVVIEIRA.COM/lvvieira/ root@lvvieira.com:/var/www/lvvieira && ssh lvvieira sudo systemctl restart nginx && ssh lvvieira sudo systemctl restart gunicorn.service"
+
+
+
+alias zsh-update-plugins="find "$ZDOTDIR/plugins" -type d -exec test -e '{}/.git' ';' -print0 | xargs -I {} -0 git -C {} pull -q"
+
+# get fastest mirrors
+alias mirror="sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirrorlist"
+alias mirrord="sudo reflector --latest 50 --number 20 --sort delay --save /etc/pacman.d/mirrorlist"
+alias mirrors="sudo reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorlist"
+alias mirrora="sudo reflector --latest 50 --number 20 --sort age --save /etc/pacman.d/mirrorlist"
+
+# Colorize grep output (good for log files)
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+
+# confirm before overwriting something
+alias cp="cp -i"
+alias mv='mv -i'
+alias rm='rm -i'
+
+# easier to read disk
+alias df='df -h'     # human-readable sizes
+alias free='free -m' # show sizes in MB
+
+# get top process eating memory
+alias psmem='ps auxf | sort -nr -k 4 | head -5'
+
+# get top process eating cpu ##
+alias pscpu='ps auxf | sort -nr -k 3 | head -5'
+
+# gpg encryption
+# verify signature for isos
+alias gpg-check="gpg2 --keyserver-options auto-key-retrieve --verify"
+# receive the key of a developer
+alias gpg-retrieve="gpg2 --keyserver-options auto-key-retrieve --receive-keys"
+
+# For when keys break
+alias archlinx-fix-keys="sudo pacman-key --init && sudo pacman-key --populate archlinux && sudo pacman-key --refresh-keys"
+
+#-------------------------------------------------------------
+# Dotfiles
+#-------------------------------------------------------------
+
+alias pf='vim $HOME/.profile'
+alias xr='vim $HOME/.Xresources'
+alias vr='vim $HOME/.vim/vimrc'
+alias spf='source $HOME/.profile'
+alias sba='source $HOME/.bash_aliases'
+alias sz='source $ZDOTDIR/.zshrc'
+alias sxr='xrdb -merge $HOME/.Xresources'
+
+#-------------------------------------------------------------
+# The PACMAN family
+#-------------------------------------------------------------
+alias p='sudo pacman --color always'
+alias pU='sudo pacman --color always -U'
+alias pss='pacman --color always -Ss'
+alias pi='sudo pacman --color always -S'
+alias pr='sudo pacman --color always -Rsn'
+
+#-------------------------------------------------------------
+# Hardware
+#-------------------------------------------------------------
+alias nvidia="watch -n 0.1 nvidia-smi"
+alias sensors="watch -n 0.1 sensors"
+alias cpu="watch -n 0.1 all_cpu_speed"
+
+#-------------------------------------------------------------
+# General commands
+#-------------------------------------------------------------
+alias s='sudo'
+alias la='ls -va --color --group-directories-first -X'
+alias ls='ls -v --color --group-directories-first'
+alias l='ls --color -vla --group-directories-first -1 -X '
+#alias l='ls --color -aA --group-directories-first -1 -X '
+alias history='vim ~/.zsh/zsh-history'
+alias h='cat ~/.zsh/zsh-history | grep'
+alias c='clear'
+alias grep='grep --colour=auto'
+alias egrep='egrep --colour=auto'
+alias fgrep='fgrep --colour=auto'
+alias cp="cp -i"
+alias mv='mv -iv'
+alias rm='rm -v'
+alias rmd='rm -rfv'
+#alias rm='mv --force --target-directory=$HOME/.trash/ --interactive --verbose'
+alias trash='cd ~/Tmp/.trash'
+alias mkd='mkdir -pv'
+alias mm='du -hsc'
+alias more=less
+alias gc='git clone'
+alias on='devmon --mount'
+alias goff='devmon -c'
+alias sdn='shutdown -h now'
+alias ..='cd ..'
+alias mine='sudo chown -R lc:users /home/lc'
+alias chx='chmod +x'
+
+#-------------------------------------------------------------
+# Programs
+#-------------------------------------------------------------
+alias r='ranger'
+alias v='vim'
+alias e='evince'
+alias n='neofetch'
+alias py='source ~/.python-mode/bin/activate'
+alias mail='neomutt'
+
+#-------------------------------------------------------------
+# Directories
+#-------------------------------------------------------------
+alias doc='cd ~/Documents'
+alias des='cd ~/Desktop'
+alias dow='cd ~/Downloads'
+alias pic='cd ~/Pictures'
+alias pyt='cd ~/Python'
+alias rea='cd ~/Reading'
+alias scr='cd ~/Script'
+alias tmp='cd ~/Tmp'
+alias vid='cd ~/Videos'

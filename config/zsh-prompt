@@ -1,0 +1,49 @@
+#!/bin/sh
+
+## autoload vcs and colors
+autoload -Uz vcs_info
+autoload -U colors && colors
+
+#==========
+# MY PROMPT
+#==========
+
+terminfo_down_sc=$terminfo[cud1]$terminfo[cuu1]$terminfo[sc]$terminfo[cud1]
+
+function insert-mode () { echo "-- INSERT --" }
+function normal-mode () { echo "-- NORMAL --" }
+
+precmd () {
+      print -rP "%B%{$fg[blue]%}[%{$fg[white]%}%n%{$fg[blue]%}@%{$fg[white]%}%m%{$fg[blue]%}] %~"
+      PS1="%{$terminfo_down_sc$(insert-mode)$terminfo[rc]%} $ "
+}
+
+function set-prompt () {
+    case ${KEYMAP} in
+      (vicmd)      VI_MODE="$(normal-mode)" ;;
+      (main|viins) VI_MODE="$(insert-mode)" ;;
+      (*)          VI_MODE="$(insert-mode)" ;;
+    esac
+
+if [ -n "$VIRTUAL_ENV" ]; then
+
+    PS1="%{$terminfo_down_sc$VI_MODE$terminfo[rc]%}"
+    PS1+="(%{$(basename "$VIRTUAL_ENV")%}) $ "
+
+ else
+
+    PS1="%{$terminfo_down_sc$VI_MODE$terminfo[rc]%} $ "
+
+fi
+
+}
+
+function zle-line-init zle-keymap-select {
+    set-prompt
+    zle reset-prompt
+}
+preexec () { print -rn -- $terminfo[el]; }
+
+zle -N zle-line-init
+zle -N zle-keymap-select
+
