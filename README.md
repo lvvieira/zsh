@@ -2,7 +2,7 @@
 
 Delete any .zshrc from your $HOME directory that has been automatically created after installing zsh.
 
-Add the follow to your .zprofile or .profile.
+Add the follow to your .zprofile
 
 export ZDOTDIR=$HOME/.zsh
 
