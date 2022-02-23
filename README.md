@@ -1,6 +1,6 @@
 # zsh
 
-Delete any .zshrc from your $HOME directory that has been automatically created after install zsh.
+Delete any .zshrc from your $HOME directory that has been automatically created after installing zsh.
 
 Add the follow to your .zprofile or .profile.
 
